@@ -1,0 +1,74 @@
+/* Applique ces règles à TOUS les éléments de la page */
+* {
+    /* Les dimensions incluent les marges internes et les bordures */
+    box-sizing: border-box;
+
+    /* Supprime les marges par défaut */
+    margin: 0;
+
+    /* Supprime les espacements internes par défaut */
+    padding: 0;
+}
+
+
+body {
+    /* Empêche d'avoir des barres de défilement */
+    overflow: hidden;
+
+    /* Fond noir */
+    background-color: #000;
+
+    /* Police utilisée sur la page */
+    font-family: Arias, sans-serif;
+}
+
+
+canvas {
+    /* Le canvas est affiché comme un bloc */
+    display: block;
+}
+
+
+.title {
+    /* Le texte reste fixé à l'écran */
+    position: fixed;
+
+    /* Prend toute la largeur et toute la hauteur */
+    inset: 0;
+
+    /* Permet de centrer facilement le texte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Couleur du texte */
+    color: #fff;
+
+    /*
+        clamp(minimum, valeur idéale, maximum)
+
+        Le texte s'adapte à la taille de l'écran.
+    */
+    font-size: clamp(1rem, 6vw, 3rem);
+
+    /* Texte assez épais */
+    font-weight: 800;
+
+    /* Espace entre les lettres */
+    letter-spacing: 8px;
+
+    /* Transforme le texte en majuscules */
+    text-transform: uppercase;
+
+    /* Crée plusieurs halos lumineux autour du texte */
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 8),
+        0 0 30px rgba(255, 255, 255, 7),
+        0 0 60px rgba(255, 255, 255, 6);
+
+    /* Permet au texte de se mélanger visuellement avec le canvas */
+    mix-blend-mode: screen;
+
+    /* Le texte ne bloque pas les clics sur le canvas */
+    pointer-events: none;
+}

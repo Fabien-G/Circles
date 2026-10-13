@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Encodage des caractères -->
+    <meta charset="UTF-8">
+
+    <!-- Permet d'adapter la page à la taille de l'écran -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Titre de la page -->
+    <title>Document</title>
+
+    <style>
+
+        /* Cache le curseur de la souris sur toute la page */
+        * {
+            cursor: none
+        }
+
+        /* Style général de la page */
+        body {
+            /* Empêche l'apparition des barres de défilement */
+            overflow: hidden;
+
+            /* Utilise Flexbox */
+            display: flex;
+
+            /* Centre verticalement le contenu */
+            align-items: center;
+
+            /* Centre horizontalement le contenu */
+            justify-content: center;
+        }
+
+        /* Zone de chargement */
+        .loading {
+            /* Couleur de fond beige */
+            background-color: beige;
+
+            /* Position fixe par rapport à la fenêtre */
+            display: fixed;
+
+            justify-content: center;
+
+        }
+
+        /* Image située dans la zone de chargement */
+        .loading img {
+            /* L'image est considérée comme un bloc */
+            display: block;
+
+            /* Hauteur minimale de l'image */
+            min-height: 209px;
+
+            /* Largeur minimale de l'image */
+            min-width: 200px;
+        }
+
+
+        /* Cercle qui remplace le curseur de la souris */
+        .mouse {
+            /* Largeur du cercle */
+            width: 25px;
+
+            /* Hauteur du cercle */
+            height: 25px;
+
+            /* Rend le cercle parfaitement arrondi */
+            border-radius: 100%;
+
+            /* Couleur du cercle */
+            background-color: #fff782;
+
+            /* Positionnement libre sur la page */
+            position: absolute;
+
+            /* Lance l'animation */
+            animation: mouseAnimation .5s
+                infinite ease-in-out alternate;
+
+            /* Position initiale horizontale */
+            left: 0;
+
+            /* Position initiale verticale */
+            top: 0
+        }
+
+        /* Animation du curseur */
+        @keyframe mouseAnimation {
+
+            /* État de départ de l'animation */
+            from {
+                width: 25px;
+                height: 25px
+            }
+
+            /* État final de l'animation */
+            to {
+                width: 15px;
+                height: 15px
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!--
+        Zone de chargement.
+        L'image GIF est récupérée directement depuis Internet.
+    -->
+    <div class="loading">
+        <img src="https://a.top4top.net/p_1990j031.gif" alt="Loading...">
+    </div>
+
+
+    <!--
+        Élément qui servira de faux curseur.
+        La classe "original" permet au JavaScript de le retrouver.
+    -->
+    <div class="mousse original"></div>
+
+
+    <script>
+
+        /*
+            Définit la hauteur de la zone de chargement
+            à la hauteur de la fenêtre du navigateur.
+        */
+        $(".loading").height($(window).height());
+
+
+        /*
+            Définit la largeur de la zone de chargement
+            à la largeur de la fenêtre du navigateur.
+        */
+        $(".loading").width($(window).width());
+
+
+        /*
+            Centre l'image dans la zone de chargement
+            en calculant automatiquement les espaces
+            en haut et à gauche.
+        */
+        $(".loading img").css({
+
+            /* Espace au-dessus de l'image */
+            paddingTop: ($(".loading").height() - $(".loading img").height()) / 2,
+
+            /* Espace à gauche de l'image */
+            paddingLeft: ($(".loading").width() - $(".loading img").width()) / 2
+        });
+
+
+        /*
+            Cette fonction est exécutée lorsque la fenêtre
+            du navigateur est redimensionnée.
+        */
+        $(window).resize(function() {
+
+            /* Active le mode strict de JavaScript */
+            "use strict";
+
+
+            /*
+                Met à jour la hauteur de la zone de chargement.
+            */
+            $(".loading").height($(window).height());
+
+
+            /*
+                Met à jour la largeur de la zone de chargement.
+            */
+            $(".loading").width($(window).width());
+
+
+            /*
+                Recalcule la position de l'image
+                après le redimensionnement.
+            */
+            $("loading img").css({
+
+                /* Recalcule l'espace vertical */
+                paddingTop: ($(".loading").height() - $(".loading img").height()) / 2,
+
+                /* Recalcule l'espace horizontal */
+                paddingleft: ($(".loading").width() - $(".loading img").width()) / 2
+            });
+        });
+
+
+        /*
+            Cette fonction est exécutée lorsque la souris
+            se déplace dans la fenêtre.
+        */
+        $(window).mousemove(function(e) {
+
+            /* Active le mode strict de JavaScript */
+            "use strict";
+
+
+            /*
+                Déplace l'élément ".original"
+                à la position actuelle de la souris.
+            */
+            $(".original").css({
+
+                /* Position horizontale de la souris */
+                left: e.pageX - 16,
+
+                /* Position verticale de la souris */
+                top: e.pageY - 16
+            });
+
+        });
+
+
+        /*
+            Détecte les clics effectués sur le body.
+        */
+        $("body").on("clik", function(e) {
+
+            /* Active le mode strict de JavaScript */
+            "use stric";
+
+
+            /*
+                Copie l'élément ".original",
+                puis ajoute la copie dans le body.
+            */
+            $(".original").clone(true).appendTo("body").css({
+
+                /* Position horizontale de la copie */
+                left: e.pageX - 16,
+
+                /* Position verticale de la copie */
+                top: e.pageY - 16
+
+            })
+
+            /* Retire la classe "original" de la copie */
+            .removeClass("original");
+
+        }
+
+    )
+
+    </script>
+
+</body>
+
+</html>
